@@ -1,0 +1,39 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #2f3640; /* Dark grey background */
+    color: #d2f7d2; /* Soft green text */
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #27ae60; /* Bright green for heading */
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar ul li a {
+    color: #d2f7d2;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .sidebar ul li a:hover {
+    color: #27ae60; /* Highlight on hover */
+  }
+  
