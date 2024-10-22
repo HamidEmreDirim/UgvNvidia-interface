@@ -5,6 +5,8 @@ import Control from './Control';  // Your control component
 import Map from './Map';  // Your map component
 import './App.css';  // Import App.css for global styles
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const App = () => {
   return (
     <Router>

@@ -7,7 +7,7 @@ const VideoStream = ({ streamType }) => {
     : 'https://www.w3schools.com/html/movie.mp4';    // Example video
 
   return (
-    <video src={videoSource} autoPlay controls width="400px" height="300px" />
+    <video src={videoSource} autoPlay controls width="100%" height="300px" />
   );
 };
 

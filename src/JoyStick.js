@@ -1,48 +1,34 @@
-import React, { useEffect } from 'react';
-import nipplejs from 'nipplejs';
-import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Joystick } from 'react-joystick-component';
 
-const Joystick = ({ sendControlData }) => {
-  useEffect(() => {
-    const manager = nipplejs.create({
-      zone: document.getElementById('joystick-zone'),
-      mode: 'static',
-      position: { left: '50%', top: '50%' },  // Ensures it stays centered
-      color: 'blue',
-      size: 150,
-    });
+export default function Joystickv2() {
 
-    manager.on('move', (evt, data) => {
-      if (data) {
-        const { x, y } = data.vector;
-        sendControlData({ x, y });
-      }
-    });
+    const [joystickData, setJoystickData] = useState({ x: 0.0, y: 0.0 })
 
-    return () => {
-      manager.destroy();
+    function ParseFloat(str, val) {
+        str = str.toString();
+        str = str.slice(0, (str.indexOf(".")) + val + 1);
+        return Number(str);
+    }
+
+    const handleMove = (data) => {
+        console.log(ParseFloat(data.x, 1), ParseFloat(data.y, 1), ParseFloat(data.y * 0.1, 2))
+
+        if (joystickData.x != ParseFloat(data.x, 1) || joystickData.y != ParseFloat(data.y, 1)) {
+            setJoystickData({ x: ParseFloat(data.x, 1), y: ParseFloat(data.y, 1) })
+        }
+        //setJoystickData({ x: ParseFloat(data.x, 1), y: ParseFloat(data.y, 1) })
     };
-  }, [sendControlData]);
 
-  return (
-    <Box
-      id="joystick-zone"
-      sx={{
-        position: 'fixed',
-        bottom: '30px',
-        right: '30px',
-        width: '200px',
-        height: '200px',
-        borderRadius: '50%',
-        backgroundColor: '#232D3F',
-        border: '2px solid #008170',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
-      }}
-    />
-  );
-};
+    const handleStop = () => {
+        setJoystickData({ x: 0, y: 0 })
+    };
 
-export default Joystick;
+    return (
+        <>
+            <div style={{ justifyContent: 'center', display: 'flex', marginTop: '30px', marginBottom: '30px' }}>
+                <Joystick size={160} baseColor="#1a1a1a" stickColor="white" move={handleMove} stop={handleStop}></Joystick>
+            </div>
+        </>
+    )
+}
